@@ -81,6 +81,7 @@ namespace Alun.Autofac.Validation.Test
             var container = builder.Build();
 
             var result = container.FindConfigurationProblems();
+            Assert.IsTrue(result[0].Message.Contains("Unable to resolve service 'Foo.IRepository'."), result[0].Message);
             Assert.IsTrue(result[0].Message.Contains("None of the constructors found with 'Public binding flags' on type 'Bar.Repository' can be invoked with the available services and parameters"), result[0].Message);
             Assert.AreEqual(1, result.Count);
         }
@@ -93,6 +94,7 @@ namespace Alun.Autofac.Validation.Test
             var container = builder.Build();
 
             var result = container.FindConfigurationProblems();
+            Assert.IsTrue(result[0].Message.Contains("Unable to resolve service 'Bar.MyService'."), result[0].Message);
             Assert.IsTrue(result[0].Message.Contains("None of the constructors found with 'Public binding flags' on type 'Bar.MyService' can be invoked with the available services and parameters"), result[0].Message);
             Assert.AreEqual(1, result.Count);            
         }

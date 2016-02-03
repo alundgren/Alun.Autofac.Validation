@@ -59,7 +59,10 @@ namespace Autofac
                 }
                 catch (DependencyResolutionException ex)
                 {
-                    exceptions.Add(ex);
+                    var e = new DependencyResolutionException(
+                        string.Format("Unable to resolve service '{0}'. {1}",
+                            typedService.ServiceType.FullName, ex.Message), ex);
+                    exceptions.Add(e);
                 }
             }
             return exceptions;
